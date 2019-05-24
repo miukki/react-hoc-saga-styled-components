@@ -1,0 +1,36 @@
+
+// Color palette
+$black: #000;
+$white: #fff;
+
+//important variable
+$browser-context: 16;
+
+//mixins
+@function em($pixels, $context: $browser-context) {
+  @return ($pixels / $context) * 1em;
+}
+  
+@function rem($pixels, $context: $browser-context) {
+  @return ($pixels / $context) * 1em;
+}
+
+
+
+//@extend
+.font {
+  font-family: 'Open Sans', sans-serif !important;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-decoration: none;
+  font-style: normal;
+}
+
+$grid-sm-breakpoint: 600px !default;
+$grid-md-breakpoint: 960px !default;
+$grid-lg-breakpoint: 1280px !default;
+$grid-xl-breakpoint: 1920px !default;
+
+

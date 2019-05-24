@@ -1,0 +1,74 @@
+version: 2
+jobs:
+
+  build:
+    docker:
+    - image: circleci/node:10
+
+    working_directory: ~/repo
+
+    steps:
+    - checkout
+
+    - restore_cache:
+        keys:
+        - v1-dependencies-{{ checksum "package.json" }}
+        - v1-dependencies-
+
+    - run: yarn
+
+    - run: yarn build
+
+    - save_cache:
+        paths:
+        - node_modules
+        key: v1-dependencies-{{ checksum "package.json" }}
+
+    # - run: yarn test
+
+    - persist_to_workspace:
+        root: ~/repo
+        paths:
+          - build
+          - ssh_pem
+
+
+  deploy:
+    machine:
+      enabled: true
+
+    working_directory: ~/repo
+
+    steps:
+    - attach_workspace:
+        at: ./workspace
+
+    - add_ssh_keys:
+        fingerprints:
+        - "e4:aa:17:b5:4f:6f:6b:f9:72:ac:3f:de:f9:c4:d6:c5"
+
+    - run:
+        name: change  file permession
+        command: chmod 600 ./workspace/ssh_pem/id_rsa
+
+    - run:
+        name: remove existing files
+        command: ssh -i ./workspace/ssh_pem/id_rsa "server@0.0.0.0" "rm -rf /var/react/*"
+
+
+    - run:
+        name: scp files
+  #      command: find . -name "id_rsa"
+        command: scp -i ./workspace/ssh_pem/id_rsa -r  ./workspace/build/* server@0.0.0.0:/var/react/
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+    - build
+    - deploy:
+        requires:
+        - build
+        filters:
+          branches:
+            only: develop

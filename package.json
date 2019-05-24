@@ -1,0 +1,45 @@
+{
+  "name": "cursor",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "main": "src/index.js",
+  "dependencies": {
+    "@material-ui/core": "3.5.1",
+    "@material-ui/icons": "^3.0.1",
+    "lodash.chunk": "^4.2.0",
+    "lodash.upperfirst": "^4.3.1",
+    "node-sass": "^4.10.0",
+    "path-to-regexp": "^2.4.0",
+    "polished": "^2.3.3",
+    "query-string": "^6.2.0",
+    "react": "16.5.2",
+    "react-container-dimensions": "^1.4.1",
+    "react-cursor-position": "latest",
+    "react-dom": "16.5.2",
+    "react-pose": "latest",
+    "react-redux": "^6.0.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.0.3",
+    "recompose": "latest",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.7",
+    "redux-saga": "^0.16.2",
+    "store": "^2.0.12",
+    "styled-components": "latest",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "CI=false react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
